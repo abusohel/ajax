@@ -49,6 +49,7 @@
 
 		</div>
 	</div>
+	{{csrf_field()}}
 	<script
 			  src="https://code.jquery.com/jquery-3.3.1.min.js"
 			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -79,6 +80,15 @@
 					$('#addButton').show('400');
 					console.log(text);
 					
+			});
+
+
+			$('#addButton').click(function(event) {
+				var text=$('#addItem').val();
+				$.post('list', {'text': text,'_token':$('input[name=_token]').val()}, function(data) {
+					
+				console.log(data);
+				});
 			});
 		});
 	</script>
