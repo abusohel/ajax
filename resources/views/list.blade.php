@@ -13,7 +13,7 @@
 			<div class="col-md-offset-3 col-md-6">				
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">Ajax Todo List<a href="#" class="pull-right"><i class="fa fa-plus" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i></a></h3>
+						<h3 class="panel-title">Ajax Todo List<a href="#" id="addNew" class="pull-right"><i class="fa fa-plus" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i></a></h3>
 					</div>
 					<div class="panel-body">
 						<ul class="list-group">
@@ -66,6 +66,18 @@
 					$('#addButton').hide('400');
 					console.log(text);
 				});
+					
+			});
+
+
+			$('#addNew').click(function(event) {
+					var text=$(this).text();
+					$('#title').text('Add New Item');
+					$('#addItem').val("");
+					$('#delete').hide('400');
+					$('#saveChanges').hide('400');
+					$('#addButton').show('400');
+					console.log(text);
 					
 			});
 		});
