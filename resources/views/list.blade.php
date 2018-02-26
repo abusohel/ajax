@@ -13,15 +13,15 @@
 			<div class="col-md-offset-3 col-md-6">				
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">Panel title <a href="#" class="pull-right"><i class="fa fa-plus" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i></a></h3>
+						<h3 class="panel-title">Ajax Todo List<a href="#" class="pull-right"><i class="fa fa-plus" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i></a></h3>
 					</div>
 					<div class="panel-body">
 						<ul class="list-group">
-						  <li class="list-group-item ourItem">Cras justo odio</li>
-						  <li class="list-group-item ourItem">Dapibus ac facilisis in</li>
-						  <li class="list-group-item ourItem">Morbi leo risus</li>
-						  <li class="list-group-item ourItem">Porta ac consectetur ac</li>
-						  <li class="list-group-item ourItem">Vestibulum at eros</li>
+						  <li class="list-group-item ourItem" data-toggle="modal" data-target="#myModal">Cras justo odio</li>
+						  <li class="list-group-item ourItem" data-toggle="modal" data-target="#myModal">Dapibus ac facilisis in</li>
+						  <li class="list-group-item ourItem" data-toggle="modal" data-target="#myModal">Morbi leo risus</li>
+						  <li class="list-group-item ourItem" data-toggle="modal" data-target="#myModal">Porta ac consectetur ac</li>
+						  <li class="list-group-item ourItem" data-toggle="modal" data-target="#myModal">Vestibulum at eros</li>
 						</ul>
 					</div>
 				</div>
@@ -33,14 +33,14 @@
 			    <div class="modal-content">
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        <h4 class="modal-title">Add New Item</h4>
+			        <h4 class="modal-title" id="title">Add New Item</h4>
 			      </div>
 			      <div class="modal-body">
 			        <p><input type="text" placeholder="Write item here" id="addItem" class="form-control"></p>
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" class="btn btn-default" data-dismiss="modal" style="display: none;">Close</button>
-			        <button type="button" class="btn btn-primary" style="display: none;">Save changes</button>
+			        <button type="button" class="btn btn-warning" id="delete" data-dismiss="modal" style="display: none;">Delete</button>
+			        <button type="button" class="btn btn-primary" id="saveChanges" style="display: none;">Save changes</button>
 			        <button type="button" class="btn btn-primary" id="addButton">Add Item</button>
 			      </div>
 			    </div><!-- /.modal-content -->
@@ -58,7 +58,13 @@
 		$(document).ready(function() {
 			$('.ourItem').each(function() {
 				$(this).click(function(event) {
-					console.log('done');
+					var text=$(this).text();
+					$('#title').text('Edit Item');
+					$('#addItem').val(text);
+					$('#delete').show('400');
+					$('#saveChanges').show('400');
+					$('#addButton').hide('400');
+					console.log(text);
 				});
 					
 			});
