@@ -57,8 +57,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script>
 		$(document).ready(function() {
-			$('.ourItem').each(function() {
-				$(this).click(function(event) {
+			$(document).on('click', '.ourItem', function(event) {
 					var text=$(this).text();
 					$('#title').text('Edit Item');
 					$('#addItem').val(text);
@@ -66,12 +65,10 @@
 					$('#saveChanges').show('400');
 					$('#addButton').hide('400');
 					console.log(text);
-				});
 					
 			});
 
-
-			$('#addNew').click(function(event) {
+			$(document).on('click', '#addNew', function(event) {
 					var text=$(this).text();
 					$('#title').text('Add New Item');
 					$('#addItem').val("");
