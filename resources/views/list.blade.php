@@ -15,15 +15,15 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">Ajax Todo List<a href="#" id="addNew" class="pull-right"><i class="fa fa-plus" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i></a></h3>
 					</div>
-					<div class="panel-body">
+					<div class="panel-body" id="items">
 						<ul class="list-group">
-						  <li class="list-group-item ourItem" data-toggle="modal" data-target="#myModal">Cras justo odio</li>
-						  <li class="list-group-item ourItem" data-toggle="modal" data-target="#myModal">Dapibus ac facilisis in</li>
-						  <li class="list-group-item ourItem" data-toggle="modal" data-target="#myModal">Morbi leo risus</li>
-						  <li class="list-group-item ourItem" data-toggle="modal" data-target="#myModal">Porta ac consectetur ac</li>
-						  <li class="list-group-item ourItem" data-toggle="modal" data-target="#myModal">Vestibulum at eros</li>
+							@foreach ($items as $item)
+								
+						  <li class="list-group-item ourItem" data-toggle="modal" data-target="#myModal">{{$item->item}}</li>
+							@endforeach
 						</ul>
 					</div>
+					<div class="panel-heading">{!! $items->links() !!}<div>
 				</div>
 			</div>
 			
@@ -41,7 +41,7 @@
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-warning" id="delete" data-dismiss="modal" style="display: none;">Delete</button>
 			        <button type="button" class="btn btn-primary" id="saveChanges" style="display: none;">Save changes</button>
-			        <button type="button" class="btn btn-primary" id="addButton">Add Item</button>
+			        <button type="button" class="btn btn-primary" data-dismiss="modal" id="addButton">Add Item</button>
 			      </div>
 			    </div><!-- /.modal-content -->
 			  </div><!-- /.modal-dialog -->
@@ -88,6 +88,7 @@
 				$.post('list', {'text': text,'_token':$('input[name=_token]').val()}, function(data) {
 					
 				console.log(data);
+				$('#items').load(location.href + ' #items');
 				});
 			});
 		});

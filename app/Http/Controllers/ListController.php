@@ -9,7 +9,8 @@ class ListController extends Controller
 {
     public function index()
     {
-     return view('list');
+    	$items=Item::latest()->paginate(5);
+     return view('list', compact('items'));
     }
 
 
