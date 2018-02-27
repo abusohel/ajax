@@ -62,11 +62,14 @@
 		$(document).ready(function() {
 			$(document).on('click', '.ourItem', function(event) {
 					var text=$(this).text();
+					var id=$(this).find('#itemId').val();
+
 					$('#title').text('Edit Item');
 					$('#addItem').val(text);
 					$('#delete').show('400');
 					$('#saveChanges').show('400');
 					$('#addButton').hide('400');
+					$('#id').val(id);
 					console.log(text);
 					
 			});
@@ -89,6 +92,14 @@
 					
 				console.log(data);
 				$('#items').load(location.href + ' #items');
+				});
+			});
+
+			$('#delete').click(function(event) {
+				var id=$('#id').val();
+				$.post('delete', {'id': id,'_token':$('input[name=_token]').val()}, function(data) {
+				$('#items').load(location.href + ' #items');
+				console.log(id);
 				});
 			});
 		});
