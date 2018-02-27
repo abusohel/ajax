@@ -25,7 +25,7 @@
 							@endforeach
 						</ul>
 					</div>
-					<div class="panel-heading">{!! $items->links() !!}<div>
+					<div class="panel-heading" id="paginate">{!! $items->links() !!}<div>
 				</div>
 			</div>
 			
@@ -43,7 +43,7 @@
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-warning" id="delete" data-dismiss="modal" style="display: none;">Delete</button>
-			        <button type="button" class="btn btn-primary" id="saveChanges" style="display: none;">Save changes</button>
+			        <button type="button" class="btn btn-primary" id="saveChanges" data-dismiss="modal" style="display: none;">Save changes</button>
 			        <button type="button" class="btn btn-primary" data-dismiss="modal" id="addButton">Add Item</button>
 			      </div>
 			    </div><!-- /.modal-content -->
@@ -65,6 +65,7 @@
 					var id=$(this).find('#itemId').val();
 
 					$('#title').text('Edit Item');
+					var text=$.trim(text);
 					$('#addItem').val(text);
 					$('#delete').show('400');
 					$('#saveChanges').show('400');
@@ -88,19 +89,39 @@
 
 			$('#addButton').click(function(event) {
 				var text=$('#addItem').val();
+				if (text=="") {
+					alert("Please type anything");
+				}else{
 				$.post('list', {'text': text,'_token':$('input[name=_token]').val()}, function(data) {
-					
-				console.log(data);
+									console.log(data);
 				$('#items').load(location.href + ' #items');
+				$('#paginate').load(location.href + ' #paginate');
 				});
+				}
 			});
 
 			$('#delete').click(function(event) {
 				var id=$('#id').val();
 				$.post('delete', {'id': id,'_token':$('input[name=_token]').val()}, function(data) {
 				$('#items').load(location.href + ' #items');
+				$('#paginate').load(location.href + ' #paginate');
 				console.log(id);
 				});
+			});
+
+			$('#saveChanges').click(function(event) {
+				var id=$('#id').val();
+				var value=$('#addItem').val();
+				if (value=="") {
+					alert("Field not null");
+				}else{
+
+				$.post('update', {'id': id, 'value': value,'_token':$('input[name=_token]').val()}, function(data) {
+				$('#items').load(location.href + ' #items');
+				$('#paginate').load(location.href + ' #paginate');
+				console.log(id);
+				});
+				}
 			});
 		});
 	</script>
