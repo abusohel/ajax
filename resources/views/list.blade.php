@@ -5,6 +5,7 @@
 	<title>Todo for ajax</title>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
 </head>
 <body>
 	<br>
@@ -25,10 +26,13 @@
 							@endforeach
 						</ul>
 					</div>
-					<div class="panel-heading" id="paginate">{!! $items->links() !!}<div>
+					<div class="panel-heading" id="paginate">{!! $items->links() !!}</div>
 				</div>
 			</div>
 			
+			<div class="col-md-2">
+				<input type="text" class="form-control" name="searchItem" id="searchItem" placeholder="Search">
+			</div>
 
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
 			  <div class="modal-dialog" role="document">
@@ -58,6 +62,7 @@
 			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 			  crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 	<script>
 		$(document).ready(function() {
 			$(document).on('click', '.ourItem', function(event) {
@@ -123,6 +128,39 @@
 				});
 				}
 			});
+
+
+			$( function() {
+			  var availableTags = [
+			    "ActionScript",
+			    "AppleScript",
+			    "Asp",
+			    "BASIC",
+			    "C",
+			    "C++",
+			    "Clojure",
+			    "COBOL",
+			    "ColdFusion",
+			    "Erlang",
+			    "Fortran",
+			    "Groovy",
+			    "Haskell",
+			    "Java",
+			    "JavaScript",
+			    "Lisp",
+			    "Perl",
+			    "PHP",
+			    "Python",
+			    "Ruby",
+			    "Scala",
+			    "Scheme"
+			  ];
+			  
+			  $( "#searchItem" ).autocomplete({
+			    source: 'http://127.0.0.1:8000/search'
+			  });
+			} );
+
 		});
 	</script>
 </body>

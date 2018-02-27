@@ -35,4 +35,47 @@ class ListController extends Controller
     	$item->save();
     	return $request->all();
     }
+
+    public function search(Request $request)
+    {
+
+
+
+    	$term=$request->term;
+    	$items=Item::where('item','LIKE','%'.$term.'%')->get();
+    	// return $item;
+    	if (count($items)==0) {
+    		$searchResult[]='No Item found';
+    	}else{
+    		foreach ($items as $key => $value) {
+    			$searchResult[]=$value->item;
+    		}
+    	}
+    	return $searchResult;
+    	// return  $availableTags = [
+			  //   "ActionScript",
+			  //   "AppleScript",
+			  //   "Asp",
+			  //   "BASIC",
+			  //   "C",
+			  //   "C++",
+			  //   "Clojure",
+			  //   "COBOL",
+			  //   "ColdFusion",
+			  //   "Erlang",
+			  //   "Fortran",
+			  //   "Groovy",
+			  //   "Haskell",
+			  //   "Java",
+			  //   "JavaScript",
+			  //   "Lisp",
+			  //   "Perl",
+			  //   "PHP",
+			  //   "Python",
+			  //   "Ruby",
+			  //   "Scala",
+			  //   "Scheme"
+			  // ];
+
+    }
 }
